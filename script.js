@@ -236,7 +236,7 @@ function exportSheetAsExcel() {
 
 function saveAsJSON(data, fileName) {
   // const dir = DriveApp.getFolderById("1-C4Ch4Qxoa-e0ohKcK6bPczQQuLLbjVd")
-  const dir = DriveApp.getFolderById('1-Dw82L8iepItrevCAa7Kf3GQFnmhrpPj')
+  const dir = DriveApp.getFolderById(listingID)
   dir.createFile(fileName + '.json', JSON.stringify(data))
 }
 
