@@ -1,5 +1,5 @@
 function autoFillCompanyAndContainer() {
-  const key = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getName();
+  const key = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getName()
   const l = key.toString().split('-')
   const company = l[0]
   const _key = l[1]
@@ -157,7 +157,7 @@ function autoCompute() {
       hasUPS = true
     }
 
-    v['fba'] = generateContentWithAnumber(container, v['to'], v['fba'], v['boxes'])
+    v['fba'] = generateContentWithAnumber(container, v['to'], v['fba'], v['boxes'], compnay)
     const cell3 = sheet.getRange(key3)
     cell3.setValue(v['fba'])
   })
@@ -188,6 +188,8 @@ function autoCompute() {
   sheet.autoResizeRows(4, lastRow - 4)
   sheet.setRowHeights(4, lastRow - 4, 32)
 
+  // ensure PDF file display normally
+  SpreadsheetApp.flush()
   // Utilities.sleep(10 * 1000)
   exportSheetAsExcel()
 
@@ -248,7 +250,8 @@ function splitNumber(string) {
 
 // operation: [STOP, P.A, C.L, PICK UP]
 // content 
-function generateContentWithAnumber(containerId, operation, content, boxes) {
+function generateContentWithAnumber(containerId, operation, content, boxes, company) {
+  content = content.toString()
   if (content.includes('\n---')) return content
 
   if (operation === 'STOP') operation = 'HOLD'
@@ -278,7 +281,10 @@ function generateContentWithAnumber(containerId, operation, content, boxes) {
   serialRange.setValue(anumber)
   // gen new row
   sheet.getRange('A'+parseInt(lastRow + 1)).setValue(containerId)
+  const _date = Utilities.formatDate(new Date(), 'America/Los_Angeles', "MM月dd日")
+  sheet.getRange('B'+parseInt(lastRow + 1)).setValue(_date)
   sheet.getRange('C'+parseInt(lastRow + 1)).setValue(containerId + anumber)
+  sheet.getRange('D'+parseInt(lastRow + 1)).setValue(company)
   sheet.getRange('E'+parseInt(lastRow + 1)).setValue(content)
   sheet.getRange('F'+parseInt(lastRow + 1)).setValue(operation)
   sheet.getRange('G'+parseInt(lastRow + 1)).setValue(boxes)
