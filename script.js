@@ -1,4 +1,4 @@
-function autoFillCompanyAndContainer() {
+function _autoFillCompanyAndContainer() {
   const key = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getName()
   const l = key.toString().split('-')
   const company = l[0]
@@ -9,7 +9,7 @@ function autoFillCompanyAndContainer() {
   return [company, _key]
 }
 // autoCompute()
-function autoCompute() {
+function _autoCompute() {
   const isLocked = addLock()
   if (isLocked) { 
     throw new Error('Locked: 前置表被其他人占用，为防止冲突，请你稍后(10秒-1分钟后)再试')
