@@ -1,4 +1,3 @@
-_autoCompute()
 function _autoCompute() {
   const isLocked = addLock()
   if (isLocked) { 
@@ -312,3 +311,5 @@ function getNextLetter (current) {
   return current.substring(0, current.length - 1)
       + String.fromCharCode(current.charCodeAt(current.length - 1) + 1)
 }
+
+_autoCompute()
