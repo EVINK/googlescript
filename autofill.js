@@ -1,4 +1,4 @@
-_autoFillCompanyAndContainer()
+
 function _autoFillCompanyAndContainer() {
   const key = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getName()
   const l = key.toString().split('-')
@@ -9,3 +9,5 @@ function _autoFillCompanyAndContainer() {
   SpreadsheetApp.getActiveSheet().getRange('H2').setValue("柜号：" + _key)
   return [company, _key]
 }
+
+_autoFillCompanyAndContainer()
